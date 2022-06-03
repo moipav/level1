@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,11 +39,30 @@
                 <div class="panel-content">
                     <div class="panel-content">
                         <div class="form-group">
+                            <?php if (!empty($_SESSION['email_error'])): ?>
                                 <div class="alert alert-danger fade show" role="alert">
-                                   Этот эл адрес уже занят другим пользователем
+                                    <?php
+                                    echo $_SESSION['email_error'];
+                                    unset($_SESSION['email_error']);
+                                    ?>
                                 </div>
+                            <?php elseif (!empty($_SESSION['password_error'])): ?>
+                            <div class="alert alert-danger fade show" role="alert">
+                                <?php
+                                echo $_SESSION['password_error'];
+                                unset($_SESSION['password_error']);
+                                ?>
+                            </div>
+                            <?php elseif(!empty($_SESSION['success'])):?>
+                            <div class="alert alert-success fade show" role="alert">
+                                <?php
+                                echo $_SESSION['success'];
+                                unset($_SESSION['success']);
+                                ?>
+                            </div>
+                            <?php endif;?>
 
-                            <form action="task_11_handler.php" method="post">
+                            <form action="actions/task_13_handler.php" method="post">
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Email</label>
                                     <input type="text" name="email" id="simpleinput" class="form-control">
