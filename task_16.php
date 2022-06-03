@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,22 +33,31 @@
                             <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
                         </div>
                     </div>
+
                     <div class="panel-container show">
                         <div class="panel-content">
                             <div class="panel-content">
                                 <div class="form-group">
+                                    <?php if(!empty($_SESSION['error'])):?>
                                     <div class="alert alert-danger fade show" role="alert">
-                                        Неверный логин или пароль
+                                        <?=$_SESSION['error']?>
                                     </div>
-                                    <form action="">
+                                    <?php unset($_SESSION['error']); endif;?>
+                                    <?php if(!empty($_SESSION['success'])):?>
+                                        <div class="alert alert-success fade show" role="alert">
+                                            <?=$_SESSION['success']?>
+                                        </div>
+                                        <?php unset($_SESSION['success']); endif;?>
+                                    <form action="actions/task_16_handler.php" method="post">
                                         <div class="form-group">
                                         	<label class="form-label" for="simpleinput">Email</label>
-                                        <input type="text" id="simpleinput" class="form-control">
+                                        <input type="text" id="simpleinput" class="form-control" name="email">
                                         </div>
 
                                         <label class="form-label" for="simpleinput">Password</label>
-                                        <input type="password" id="simpleinput" class="form-control">
-                                        <button class="btn btn-success mt-3">Submit</button>
+                                        <input type="password" id="simpleinput" class="form-control" name="password">
+                                        <button class="btn btn-success mt-3" type="submit">Submit</button>
+                                        <button class="btn btn-success mt-3"><a href="task_13.php" style="text-decoration: none">Регистрация</a></button>
                                     </form>
                                 </div>
                             </div>

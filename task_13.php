@@ -71,6 +71,7 @@ session_start();
                                 <label class="form-label" for="simpleinput">Password</label>
                                 <input type="password" name="password" id="simpleinput" class="form-control">
                                 <button class="btn btn-success mt-3">Submit</button>
+                                <button class="btn btn-success mt-3"><a href="task_16.php" style="text-decoration: none">Авторизация</a></button>
                             </form>
                         </div>
                     </div>
