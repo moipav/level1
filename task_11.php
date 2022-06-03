@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+<?php
+    require_once 'db.php';
+if ($_GET['text']) {
+    $sql = "INSERT INTO `task11` (`text`) VALUE (:text)";
+    /**@var $pdo*/
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':text', $_GET['text']);
+    $stmt->execute();
+}
+
+var_dump($_GET);
+?><!DOCTYPE html>
 <html lang="en">
 <head>
         <meta charset="utf-8">
@@ -35,10 +46,10 @@
                         <div class="panel-content">
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <form action="">
+                                    <form action="#" method="get">
                                         <label class="form-label" for="simpleinput">Text</label>
-                                        <input type="text" id="simpleinput" class="form-control">
-                                        <button class="btn btn-success mt-3">Submit</button>
+                                        <input type="text" id="simpleinput" class="form-control" name="text">
+                                        <button type="submit" class="btn btn-success mt-3">Submit</button>
                                     </form>
                                 </div>
                             </div>
