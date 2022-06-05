@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+require_once 'db.php';
+$file_path = '/img/users_images/';
+/**@var $pdo */
+
+
+$stmt=$pdo->prepare("SELECT * FROM task18");
+$stmt->execute();
+$result = $stmt->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,10 +47,21 @@
                             <div class="panel-content">
                                 <div class="panel-content">
                                     <div class="form-group">
-                                        <form action="">
+                                        <?php if(!empty($_SESSION['success'])):?>
+                                            <div class="alert alert-success fade show" role="alert">
+                                                <?=$_SESSION['success']?>
+                                            </div>
+                                            <?php unset($_SESSION['success']); endif;?>
+
+                                        <?php if (!empty($_SESSION['error'])): ?>
+                                            <div class="alert alert-danger fade show" role="alert">
+                                                <?= $_SESSION['error'] ?>
+                                            </div>
+                                            <?php unset($_SESSION['error']); endif; ?>
+                                        <form action="actions/task_18_handler.php" method="post" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label class="form-label" for="simpleinput">Image</label>
-                                            <input type="file" id="simpleinput" class="form-control">
+                                                <input type="file" id="simpleinput" class="form-control" name="image">
                                             </div>
                                             <button class="btn btn-success mt-3">Submit</button>
                                         </form>
@@ -62,22 +85,18 @@
                         </div>
                         <div class="panel-container show">
                             <div class="panel-content">
-                                <div class="panel-content image-gallery">
+                                <form action="actions/task_19_handler.php" class="panel-content image-gallery" method="get">
                                     <div class="row">
-                                        <div class="col-md-3 image">
-                                            <img src="img/demo/gallery/1.jpg">
-                                            <a class="btn btn-danger" href="#" onclick="confirm('Вы уверены?');">Удалить</a>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <img src="img/demo/gallery/2.jpg">
-                                            <a class="btn btn-danger" onclick="confirm('Вы уверены?');" href="#">Удалить</a>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <img src="img/demo/gallery/3.jpg">
-                                            <a class="btn btn-danger" onclick="confirm('Вы уверены?');" href="#">Удалить</a>
-                                        </div>
+
+                                            <?php foreach ($result as $image):?>
+                                                <div class="col-md-3 image">
+                                                    <img src="<?=$file_path . $image['image']?>">
+                                                    <button name="id" class="btn btn-danger" onclick="confirm('Вы уверены?');" value="<?=$image['id']?>">Удалить</button>
+                                                </div>
+                                            <?php endforeach;?>
+
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
