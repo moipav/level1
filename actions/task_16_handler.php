@@ -3,6 +3,7 @@ require_once __DIR__ . '/../db.php';
 session_start();
 $email = $_POST['email'];
 $password = $_POST['password'];
+$_SESSION['login'] = $email;
 
 $sql = "SELECT * FROM task13 WHERE email = :email";
 /**@var $pdo*/
@@ -21,6 +22,7 @@ if (!password_verify($password, $result['password_hash'])){
     die();
 }
 
-$_SESSION['success'] = 'Добро пожаловать!';
-header("location:/../task_16.php");
+//$_SESSION['success'] = 'Добро пожаловать!';
+
+header("location:/../task_17.php");
 die();

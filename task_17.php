@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,9 +38,9 @@
                             <div class="panel-content">
                                 <div class="form-group">
                                     <div class="alert alert-success fade show" role="alert">
-                                        Здравствуйте, ИМЯ_ПОЛЬЗОВАТЕЛЯ.
+                                        Здравствуйте, <?= $_SESSION['login']?>.
                                     </div>
-                                    <a href="#" class="btn btn-info">Выйти</a>
+                                    <a href="actions/task_17_handler.php" class="btn btn-info">Выйти</a>
                                 </div>
                             </div>
                         </div>

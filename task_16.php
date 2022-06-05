@@ -57,7 +57,8 @@
                                         <label class="form-label" for="simpleinput">Password</label>
                                         <input type="password" id="simpleinput" class="form-control" name="password">
                                         <button class="btn btn-success mt-3" type="submit">Submit</button>
-                                        <button class="btn btn-success mt-3"><a href="task_13.php" style="text-decoration: none">Регистрация</a></button>
+<!--                                        <button class="btn btn-success mt-3"></button>-->
+                                            <a href="task_13.php" class="btn btn-success mt-3">Регистрация</a>
                                     </form>
                                 </div>
                             </div>
