@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+require_once 'db.php';
+$file_path = '/img/users_images/';
+/**@var $pdo */
+
+
+$stmt=$pdo->prepare("SELECT * FROM task18");
+$stmt->execute();
+$result = $stmt->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,10 +47,22 @@
                             <div class="panel-content">
                                 <div class="panel-content">
                                     <div class="form-group">
-                                        <form action="">
+                                        <?php if(!empty($_SESSION['success'])):?>
+                                            <div class="alert alert-success fade show" role="alert">
+                                                <?=$_SESSION['success']?>
+                                            </div>
+                                            <?php unset($_SESSION['success']); endif;?>
+
+                                        <?php if (!empty($_SESSION['error'])): ?>
+                                            <div class="alert alert-danger fade show" role="alert">
+                                                <?= $_SESSION['error'] ?>
+                                            </div>
+                                            <?php unset($_SESSION['error']); endif; ?>
+
+                                        <form action="actions/task_18_handler.php" method="post" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label class="form-label" for="simpleinput">Image</label>
-                                            <input type="file" id="simpleinput" class="form-control">
+                                            <input type="file" id="simpleinput" class="form-control" name="image">
                                             </div>
                                             <button class="btn btn-success mt-3">Submit</button>
                                         </form>
@@ -64,17 +88,12 @@
                             <div class="panel-content">
                                 <div class="panel-content image-gallery">
                                     <div class="row">
+                                        <?php foreach ($result as $image):?>
                                         <div class="col-md-3 image">
-                                            <img src="img/demo/gallery/1.jpg">
+                                            <img src="<?=$file_path . $image['image']?>">
                                         </div>
+                                        <?php endforeach;?>
 
-                                        <div class="col-md-3 image">
-                                            <img src="img/demo/gallery/2.jpg">
-                                        </div>
-
-                                        <div class="col-md-3 image">
-                                            <img src="img/demo/gallery/3.jpg">
-                                        </div>
                                     </div>
                                 </div>
                             </div>

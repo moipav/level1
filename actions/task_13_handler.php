@@ -31,4 +31,3 @@ if (empty($_SESSION['email_error']) && empty($_SESSION['password_error'])) {
     exit();
 }
 
-var_dump($result);
